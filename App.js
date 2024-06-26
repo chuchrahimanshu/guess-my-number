@@ -1,24 +1,32 @@
 import { StatusBar } from 'expo-status-bar';
 import StartGame from './screens/StartGame';
-import { LinearGradient } from 'expo-linear-gradient';
-import { ImageBackground, StyleSheet } from 'react-native';
-import BACKGROUND from "./assets/bg.jpg";
+import { StyleSheet } from 'react-native';
+import { useState } from 'react';
+import Game from './screens/Game';
+import UserName from './screens/UserName';
 
 export default function App() {
+
+  const [currentScreen, setCurrentScreen] = useState("welcome");
+  const [userName, setUserName] = useState("");
+
   return (
-    <LinearGradient 
-      colors={["#8E0E00", "#1F1C18"]} 
-      style={styles.container}
-    >
-      <ImageBackground 
-        source={BACKGROUND}
-        style={styles.container}
-        imageStyle={styles.bgImage}
-      >
-        <StartGame />
-        <StatusBar style='light' />
-      </ImageBackground>
-    </LinearGradient>
+    <>
+      {currentScreen === "welcome" && 
+        <UserName 
+          setCurrentScreen={setCurrentScreen}
+          userName={userName}
+          setUserName={setUserName}
+        />
+      }
+      {currentScreen === "start" && 
+        <StartGame setCurrentScreen={setCurrentScreen} />
+      }
+      {currentScreen === "game" && 
+        <Game setCurrentScreen={setCurrentScreen} />
+      }
+      <StatusBar style='light' />
+    </>
   );
 }
 

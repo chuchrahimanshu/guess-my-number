@@ -1,9 +1,8 @@
 import { StyleSheet, TextInput, View, Alert } from "react-native"
 import PrimaryButton from "../components/PrimaryButton"
-import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
 
-const StartGame = () => {
+const StartGame = ({setSwitchToGame}) => {
 
     const [input, setInput] = useState("");
 
@@ -39,30 +38,32 @@ const StartGame = () => {
             )
             return;
         }
+
+        setSwitchToGame(true);
+        return;
     }
 
     return (
         <View style={styles.container} >
             <View>
-                <LinearGradient colors={["transparent", "black", "transparent"]} style={styles.subContainer} >
-                    <TextInput 
-                        keyboardType="number-pad" 
-                        style={styles.numberInput}
-                        maxLength={2}
-                        value={input}
-                        onChangeText={handleInputChange}
+                <TextInput 
+                    keyboardType="number-pad" 
+                    style={styles.numberInput}
+                    maxLength={2}
+                    value={input}
+                    onChangeText={handleInputChange}
+                    cursorColor="white"
+                />
+                <View style={styles.buttonContainer} >
+                    <PrimaryButton
+                        onPress={handlePressReset}
+                        buttonName="Reset"
                     />
-                    <View style={styles.buttonContainer} >
-                        <PrimaryButton
-                            onPress={handlePressReset}
-                            buttonName="Reset"
-                        />
-                        <PrimaryButton
-                            onPress={handlePressConfirm}
-                            buttonName="Confirm"
-                        />
-                    </View>
-                </LinearGradient>
+                    <PrimaryButton
+                        onPress={handlePressConfirm}
+                        buttonName="Confirm"
+                    />
+                </View>
             </View>
         </View>
     )

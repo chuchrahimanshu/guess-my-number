@@ -1,7 +1,8 @@
+import { Text } from "react-native"
 
 const Game = () => {
   return (
-    <div>Game</div>
+    <Text>Game</Text>
   )
 }
 
